@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script type="text/javascript" src="/js/jq-1.5-min.js"></script>
+        <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="/css/demo_page.css" />
+        <link type="text/css" rel="stylesheet" href="/css/demo_table.css" />
+        <link type="text/css" rel="stylesheet" href="/css/demo_table_jui.css" />
+        <link type="text/css" rel="stylesheet" href="/css/pepper-grinder/jquery-ui-1.8.9.custom.css" />
+        <title>Smooth DB Manager</title>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('table').dataTable({
+                    "sPaginationType": "full_numbers",
+                    "bJQueryUI": true
+                });
+            });
+        </script>
+        <style type="text/css">
+            body {
+                font-family: sans-serif;
+                font-size: 1em;
+            }
+
+            table {
+                width: 100%;           
+                font-size: 0.8em;
+            }
+
+            .pointer {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <table width="100%">
+            <thead>
+                <tr>
+                <?php foreach($this->meta as $key=>$val): ?>
+                    <th><?php echo $key; ?></th>                    
+                <?php endforeach; ?>
+                    <th>action...</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach($this->data as $key=>$val): ?>
+                  <tr>
+                  <?php foreach ($val as $k=>$v):?>
+                    <td><?php echo substr($v, 0, 32); ?></td>                    
+                  <?php endforeach; ?>
+                    <td><a href="/<?php echo $this->table; ?>/crud/<?php echo(array_shift($val)); ?>/"<img border="0" class="pointer" src="/images/edit.png" width="16" height="16" alt="edit" />
+                  </tr>
+              <?php endforeach; ?>
+            </tbody>
+        </table>
+        <?php
+            //pr($this->data);
+        ?>
+    </body>
+</html>
